@@ -1,6 +1,6 @@
 name: 'Javascript action'
 description: 'Javascript action'
 runs:
-  using: 'node18'
+  using: 'node16'
   main: 'main.js'
    
