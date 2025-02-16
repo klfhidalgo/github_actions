@@ -20,6 +20,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Dependencies
         uses: ./.github/actions/caching # aqui automaticamente busca el archivo action.yml
+        with:
+          caching: 'false'
       - name: Test code
         id: run-tests
         run: npm run test
