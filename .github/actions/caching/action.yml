@@ -5,6 +5,10 @@ inputs:
     description: 'Cache dependencies ? '
     required: false
     default: 'true'
+outputs:
+  caching:
+    description: 'Caching dependencies ?'
+    value: ${{ steps.install_dependencies.outputs.caching }} 
 runs:
   using: 'composite'
   steps:
@@ -18,5 +22,7 @@ runs:
     - name: Install dependencies
       id: install_dependencies
       if: steps.cache.outputs.cache-hit != 'true' && ${{ inputs.caching != 'true' }}
-      run: npm ci 
+      run: |
+        npm ci 
+        echo "::set-output name=caching::'${{ inputs.caching }}'"
       shell: bash # esto de bebe agregar para saber que es un shell bash         

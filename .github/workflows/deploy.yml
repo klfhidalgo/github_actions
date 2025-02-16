@@ -19,9 +19,12 @@ jobs:
       - name: Get code
         uses: actions/checkout@v4
       - name: Dependencies
+        id: caching
         uses: ./.github/actions/caching # aqui automaticamente busca el archivo action.yml
         with:
           caching: 'false'
+      - name: Output caching
+        run: echo "Cahing used --> ${{ steps.caching.outputs.caching }}"
       - name: Test code
         id: run-tests
         run: npm run test
