@@ -67,6 +67,8 @@ jobs:
   javascript_action:
     runs-on: ubuntu-latest
     steps:
+      - name: Get code
+        uses: actions/checkout@v4 
       - name: Javascript Action
         id: js_action
         uses: ./.github/actions/javascript_action # aqui automaticamente busca el archivo action.yml

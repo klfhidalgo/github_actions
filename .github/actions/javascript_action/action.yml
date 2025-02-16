@@ -1,28 +1,6 @@
-name: 'Get and cache dependencies'
-description: 'Get and cache dependencies'
-inputs:
-  caching: 
-    description: 'Cache dependencies ? '
-    required: false
-    default: 'true'
-outputs:
-  caching:
-    description: 'Caching dependencies ?'
-    value: ${{ steps.install_dependencies.outputs.caching }} 
+name: 'Javascript action'
+description: 'Javascript action'
 runs:
-  using: 'composite'
-  steps:
-    # en este step nop hace falta agregar shell:bash
-    - name: Cache dependencies
-      id: cache_dependencies
-      uses: actions/cache@v4
-      with:
-        path: node_modules
-        key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
-    - name: Install dependencies
-      id: install_dependencies
-      if: steps.cache.outputs.cache-hit != 'true' && ${{ inputs.caching != 'true' }}
-      run: |
-        npm ci 
-        echo "::set-output name=caching::'${{ inputs.caching }}'"
-      shell: bash # esto de bebe agregar para saber que es un shell bash         
+  using: 'node18'
+  main: 'main.js'
+   
